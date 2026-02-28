@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/FinancialTrackerApi/FinancialTrackerApi/obj
+/FinancialTrackerApi/.vs/FinancialTrackerApi.slnx/v18
+/FinancialTrackerApi/.vs/FinancialTrackerApi.slnx/FileContentIndex
+/FinancialTrackerApi/FinancialTrackerApi/Properties/launchSettings.json
+/FinancialTrackerApi/.vs
+/FinancialTrackerApi/FinancialTrackerApi/bin/Debug/net10.0
