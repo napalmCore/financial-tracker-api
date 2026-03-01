@@ -15,9 +15,10 @@ var config = new ConfigurationBuilder()
 
 builder.Services.AddControllers();
 
+var connectinoString = Environment.GetEnvironmentVariable("financialTrackerDbConnectionString");
 
 builder.Services.AddDbContext<FinancialTrackerDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectinoString));
 
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
