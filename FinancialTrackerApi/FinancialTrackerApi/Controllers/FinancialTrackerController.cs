@@ -1,3 +1,4 @@
+using FinancialTrackerApi.db;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialTrackerApi.Controllers
@@ -6,19 +7,17 @@ namespace FinancialTrackerApi.Controllers
     [Route("[controller]")]
     public class FinancialTrackerController : ControllerBase
     {
-        private static readonly string[] Categories =
-        [
-            "want", "need"
-        ];
+        private FinancialTrackerDbContext _context;
+
+        public FinancialTrackerController(FinancialTrackerDbContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet(Name = "GetCategories")]
         public IEnumerable<Category> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new Category
-            {
-                Name = Categories[Random.Shared.Next(Categories.Length)]
-            })
-            .ToArray();
+            return _context.Categories.ToArray();
         }
     }
 }
