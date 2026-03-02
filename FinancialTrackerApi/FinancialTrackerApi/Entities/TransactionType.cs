@@ -2,7 +2,7 @@
 
 namespace FinancialTrackerApi.Entities
 {
-    public class Category
+    public class TransactionType
     {
         [Key]
         public int Id { get; set; }

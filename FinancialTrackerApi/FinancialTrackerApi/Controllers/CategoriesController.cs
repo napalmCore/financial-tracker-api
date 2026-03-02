@@ -1,4 +1,5 @@
 using FinancialTrackerApi.db;
+using FinancialTrackerApi.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialTrackerApi.Controllers
