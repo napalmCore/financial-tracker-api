@@ -17,6 +17,14 @@ var config = new ConfigurationBuilder()
 
 builder.Services.AddControllers();
 
+builder.Services.AddApiVersioning(options =>
+{
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    options.ReportApiVersions = true;
+});
+
+
 var connectinoString = Environment.GetEnvironmentVariable("financialTrackerDbConnectionString");
 
 builder.Services.AddDbContext<FinancialTrackerDbContext>(options =>
@@ -48,6 +56,9 @@ app.UseCors(FinancialTrackerReactUi);
 
 app.UseAuthorization();
 
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action}/{id?}");
 
 app.MapControllers();
 
