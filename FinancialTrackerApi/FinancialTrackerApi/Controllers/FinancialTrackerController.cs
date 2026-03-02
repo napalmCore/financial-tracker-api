@@ -4,20 +4,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinancialTrackerApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class FinancialTrackerController : ControllerBase
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/[controller]/[action]")]
+    public class CategoriesController : ControllerBase
     {
         private FinancialTrackerDbContext _context;
 
-        public FinancialTrackerController(FinancialTrackerDbContext context)
+        public CategoriesController(FinancialTrackerDbContext context)
         {
             _context = context;
         }
 
-        [HttpGet(Name = "GetCategories")]
-        public IEnumerable<Category> Get()
+        [ApiVersion("1.0")]
+        [HttpGet]
+        public ActionResult<List<Category>> Index()
         {
-            return _context.Categories.ToArray();
+            return _context.Categories.ToList();
         }
     }
 }
