@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FinancialTrackerApi.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
 namespace FinancialTrackerApi.db
@@ -10,15 +11,15 @@ namespace FinancialTrackerApi.db
         {
         }
         public DbSet<Category> Categories => Set<Category>();
+        public DbSet<Transaction> Transactions => Set<Transaction>();
+
+        public DbSet<TransactionType> TransactionTypes => Set<TransactionType>();
+
 
         #region Required
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category>()
-                .HasKey(c => c.Id);
-
-            modelBuilder.Entity<Category>()
-                .ToTable("Categories");
+                
         }
         #endregion
 
