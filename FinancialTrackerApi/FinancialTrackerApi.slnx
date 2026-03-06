@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="FinancialTrackerApi/FinancialTrackerApi.csproj" />
+  <Project Path="Application/Application.csproj" Id="bfb85d28-d48e-4ef4-aa65-499fdcae186e" />
+  <Project Path="Domaine/Domaine.csproj" Id="28220cc3-5267-45f0-ab13-7dc5d3630ac6" />
+  <Project Path="FinancialTrackerApi/Api.csproj" />
+  <Project Path="infrastructure/infrastructure.csproj" Id="f39c3929-6a8a-4619-b993-31f32dc05958" />
 </Solution>

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinancialTrackerApi.Entities
+namespace Domaine.Entities
 {
-    public class Category
+    public class TransactionType
     {
         [Key]
         public int Id { get; set; }

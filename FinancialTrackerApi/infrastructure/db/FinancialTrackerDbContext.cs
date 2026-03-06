@@ -1,8 +1,7 @@
-﻿using FinancialTrackerApi.Entities;
+﻿using Domaine.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 
-namespace FinancialTrackerApi.db
+namespace infrastructure.db
 {
     public class FinancialTrackerDbContext : DbContext
     {

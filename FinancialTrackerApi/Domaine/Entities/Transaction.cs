@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinancialTrackerApi.Entities
+namespace Domaine.Entities
 {
     public class Transaction
     {

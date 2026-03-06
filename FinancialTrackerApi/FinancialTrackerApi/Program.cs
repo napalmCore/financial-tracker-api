@@ -1,6 +1,10 @@
-using FinancialTrackerApi.db;
+using Application;
+using Application.Category.Queries;
+using Domaine.Services;
+using infrastructure.db;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using System.Net.NetworkInformation;
 
 const string FinancialTrackerReactUi = "_financialTrackerReactUi";
 
@@ -15,7 +19,11 @@ var config = new ConfigurationBuilder()
 
 // Add services to the container.
 
+ApplicationServiceExtensions.ConfigureService(builder.Services);
+
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddApiVersioning(options =>
 {
