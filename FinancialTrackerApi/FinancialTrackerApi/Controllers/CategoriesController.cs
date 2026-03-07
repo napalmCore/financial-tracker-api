@@ -1,5 +1,6 @@
-using FinancialTrackerApi.db;
-using FinancialTrackerApi.Entities;
+using Application.Category.Queries;
+using Application.Dtos;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialTrackerApi.Controllers
@@ -9,18 +10,20 @@ namespace FinancialTrackerApi.Controllers
     [Route("api/[controller]/[action]")]
     public class CategoriesController : ControllerBase
     {
-        private FinancialTrackerDbContext _context;
+        private IMediator _mediator;
 
-        public CategoriesController(FinancialTrackerDbContext context)
+        public CategoriesController(IMediator mediator)
         {
-            _context = context;
+            _mediator = mediator;
         }
 
         [ApiVersion("1.0")]
         [HttpGet]
-        public ActionResult<List<Category>> Index()
+        public async Task<ActionResult<List<CategoryDto>>> IndexAsync()
         {
-            return _context.Categories.ToList();
+            var categories = await _mediator.Send(new GetCategoriesRequest());
+
+            return categories;
         }
     }
 }

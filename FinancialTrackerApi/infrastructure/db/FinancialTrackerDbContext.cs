@@ -1,8 +1,7 @@
-﻿using FinancialTrackerApi.Entities;
+﻿using Domaine.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 
-namespace FinancialTrackerApi.db
+namespace infrastructure.db
 {
     public class FinancialTrackerDbContext : DbContext
     {
@@ -10,10 +9,10 @@ namespace FinancialTrackerApi.db
     : base(options)
         {
         }
-        public DbSet<Category> Categories => Set<Category>();
-        public DbSet<Transaction> Transactions => Set<Transaction>();
+        public DbSet<CategoryEntity> Categories => Set<CategoryEntity>();
+        public DbSet<TransactionEntity> Transactions => Set<TransactionEntity>();
 
-        public DbSet<TransactionType> TransactionTypes => Set<TransactionType>();
+        public DbSet<TransactionTypeEntity> TransactionTypes => Set<TransactionTypeEntity>();
 
 
         #region Required
