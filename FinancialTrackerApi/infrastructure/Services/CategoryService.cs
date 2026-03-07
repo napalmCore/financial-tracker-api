@@ -1,4 +1,5 @@
-﻿using Domaine.Entities;
+﻿using Application.Interfaces;
+using Domaine.Entities;
 using infrastructure.db;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,7 +16,7 @@ namespace Domaine.Services
             _context = dbContext;
         }
 
-        public async Task<List<Category>> GetAllCategoriesAsync()
+        public async Task<List<CategoryEntity>> GetAllCategoriesAsync()
         {
             return await _context.Categories.ToListAsync();
         }

@@ -2,7 +2,7 @@
 
 namespace Domaine.Entities
 {
-    public class Category
+    public class TransactionTypeEntity
     {
         [Key]
         public int Id { get; set; }

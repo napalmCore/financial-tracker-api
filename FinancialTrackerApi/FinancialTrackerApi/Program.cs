@@ -1,6 +1,8 @@
 using Application;
 using Application.Category.Queries;
+using Application.Interfaces;
 using Domaine.Services;
+using infrastructure;
 using infrastructure.db;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -20,10 +22,9 @@ var config = new ConfigurationBuilder()
 // Add services to the container.
 
 ApplicationServiceExtensions.ConfigureService(builder.Services);
+infrastructureServiceExtensions.ConfigureService(builder.Services);
 
 builder.Services.AddControllers();
-
-builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -66,7 +67,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action}/{id?}");
+    pattern: "api/{controller}/{action}/{id?}");
 
 app.MapControllers();
 
