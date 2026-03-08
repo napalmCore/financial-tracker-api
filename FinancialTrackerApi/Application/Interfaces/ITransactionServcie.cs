@@ -7,5 +7,8 @@ namespace infrastructure.Services
     {
         Task<TransactionEntity> CreateTransactionAsync(CreateTransactionCommand transaction);
 
+        Task<TransactionEntity> GetTransactionByIdAsync(int id);
+        Task<List<TransactionEntity>> GetTransactions();
+
     }
 }

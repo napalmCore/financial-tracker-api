@@ -1,6 +1,7 @@
 ﻿using Application.Transaction.Commands;
 using Domaine.Entities;
 using infrastructure.db;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,6 +32,16 @@ namespace infrastructure.Services
 
             return transactionEntity;
 
+        }
+
+        public async Task<TransactionEntity> GetTransactionByIdAsync(int id)
+        {
+            return await _context.Transactions.FindAsync(id);
+        }
+
+        public async Task<List<TransactionEntity>> GetTransactions()
+        {
+            return await _context.Transactions.ToListAsync();
         }
     }
 }
