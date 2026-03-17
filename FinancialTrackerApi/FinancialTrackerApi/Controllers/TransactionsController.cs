@@ -6,8 +6,8 @@ using Application.Transaction.Queries;
 
 namespace Api.Controllers
 {
-    [Route("api/v{version:apiVersion}/[controller]")]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]/{action=Index}")]
+    [Route("api/[controller]/{action=Index}")]
     public class TransactionsController : ControllerBase
     {
         private readonly IMediator _mediator;

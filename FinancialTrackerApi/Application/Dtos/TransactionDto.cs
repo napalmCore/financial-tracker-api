@@ -7,6 +7,8 @@
         public DateTime Date { get; set; }
         public string Description { get; set; }
 
+        public CategoryDto category { get; set; }
+
         public static TransactionDto FromEntity(Domaine.Entities.TransactionEntity entity)
         {
             return new TransactionDto
@@ -14,7 +16,7 @@
                 Id = entity.Id,
                 Amount = entity.Amount,
                 Date = entity.Date,
-                Description = entity.Description
+                Description = entity.Description,
             };
         }
     }

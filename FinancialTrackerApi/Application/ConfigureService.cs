@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace Application
@@ -19,6 +20,7 @@ namespace Application
             services.AddAutoMapper(cfg =>
             {
                 cfg.CreateMap<TransactionEntity, TransactionDto>();
+                cfg.CreateMap<CategoryEntity, CategoryDto>();
             });
 
             return services;

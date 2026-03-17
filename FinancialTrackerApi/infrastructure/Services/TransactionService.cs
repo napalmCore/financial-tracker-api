@@ -41,7 +41,7 @@ namespace infrastructure.Services
 
         public async Task<List<TransactionEntity>> GetTransactions()
         {
-            return await _context.Transactions.ToListAsync();
+            return await _context.Transactions.Include(e => e.Category).ToListAsync();
         }
     }
 }
