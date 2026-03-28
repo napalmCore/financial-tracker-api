@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Domaine.Services;
 using infrastructure;
 using infrastructure.db;
+using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System.Net.NetworkInformation;
@@ -68,7 +69,9 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "api/{controller}/{action=Index}/{id?}");
+    pattern: "api/{controller}/{action=Index}/{id:int}",
+    defaults : new {id = RoutePatternParameterKind.Optional}
+    );
 
 app.MapControllers();
 

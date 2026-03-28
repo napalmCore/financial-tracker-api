@@ -39,6 +39,11 @@ namespace infrastructure.Services
             return await _context.Transactions.FindAsync(id);
         }
 
+        public Task<TransactionEntity> GetTransactionByIdAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<TransactionEntity>> GetTransactions()
         {
             return await _context.Transactions.Include(e => e.Category).ToListAsync();

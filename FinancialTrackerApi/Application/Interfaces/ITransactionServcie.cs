@@ -9,6 +9,5 @@ namespace infrastructure.Services
 
         Task<TransactionEntity> GetTransactionByIdAsync(int id);
         Task<List<TransactionEntity>> GetTransactions();
-
     }
 }
