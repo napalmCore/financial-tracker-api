@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinancialTrackerApi.Controllers
 {
     [ApiController]
-    [Route("api/v{version:apiVersion}/[controller]")]
-    [Route("api/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/[controller]/{action=Index}")]
+    [Route("api/[controller]/{action=Index}")]
     public class CategoriesController : ControllerBase
     {
         private IMediator _mediator;

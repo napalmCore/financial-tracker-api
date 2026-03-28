@@ -36,7 +36,15 @@ namespace infrastructure.Services
 
         public async Task<TransactionEntity> GetTransactionByIdAsync(int id)
         {
-            return await _context.Transactions.FindAsync(id);
+            var transaction = await _context.Transactions
+                .Include(e => e.Category)
+                .Where(e => e.Id == id).FirstOrDefaultAsync();
+
+            if(transaction == null) {
+                throw new Exception("Transaction not found");
+            }
+
+            return transaction;
         }
 
         public Task<TransactionEntity> GetTransactionByIdAsync()

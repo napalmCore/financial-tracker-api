@@ -6,7 +6,7 @@ using Application.Transaction.Queries;
 
 namespace Api.Controllers
 {
-    [Route("api/v{version:apiVersion}/[controller]/{action=Index}")]
+    [Route("api/v{version:apiVersion}/[controller]/{action=Index}/{id:int?}")]
     [Route("api/[controller]/{action=Index}/{id:int?}")]
     public class TransactionsController : ControllerBase
     {
