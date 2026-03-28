@@ -7,17 +7,19 @@ using Application.Transaction.Queries;
 namespace Api.Controllers
 {
     [Route("api/v{version:apiVersion}/[controller]/{action=Index}")]
-    [Route("api/[controller]/{action=Index}")]
+    [Route("api/[controller]/{action=Index}/{id:int?}")]
     public class TransactionsController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public TransactionsController(IMediator mediator) {
+        public TransactionsController(IMediator mediator)
+        {
             _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index() {
+        public async Task<ActionResult> Index()
+        {
             var transactions = await _mediator.Send(new GetTransactionsQuery());
             return Ok(transactions);
         }
@@ -28,6 +30,18 @@ namespace Api.Controllers
             var createdTransaction = await _mediator.Send(transaction);
 
             return createdTransaction;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<TransactionDto>> GetById(int id)
+        {
+            var transaction = await _mediator.Send(new GetTransactionQuery { Id = id });
+            if (transaction == null)
+            {
+                return NotFound();
+            }
+            return transaction;
+
         }
     }
 }

@@ -5,5 +5,6 @@ namespace Application.Interfaces
     public interface ICategoryService
     {
         Task<List<CategoryEntity>> GetAllCategoriesAsync();
+        Task<CategoryEntity> GetCategoryByIdAsync(int id);
     }
 }

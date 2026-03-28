@@ -20,5 +20,10 @@ namespace Domaine.Services
         {
             return await _context.Categories.ToListAsync();
         }
+
+        public async Task<CategoryEntity> GetCategoryByIdAsync(int id)
+        {
+            return await _context.Categories.FindAsync(id);
+        }
     }
 }

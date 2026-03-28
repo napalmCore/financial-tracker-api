@@ -25,5 +25,17 @@ namespace FinancialTrackerApi.Controllers
 
             return categories;
         }
+
+        [ApiVersion("1.0")]
+        [HttpGet]
+        public async Task<ActionResult<CategoryDto>> GetByIdAsync(int id)
+        {
+            var category = await _mediator.Send(new GetCategoryRequest { Id = id });
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return category;
+        }
     }
 }
