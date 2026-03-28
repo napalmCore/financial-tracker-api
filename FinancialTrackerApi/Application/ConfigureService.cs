@@ -19,7 +19,9 @@ namespace Application
 
             services.AddAutoMapper(cfg =>
             {
-                cfg.CreateMap<TransactionEntity, TransactionDto>();
+                cfg.CreateMap<TransactionEntity, TransactionDto>()
+                .ForMember(dest => dest.TypeId, opt => opt.MapFrom(src => src.TransactionTypeId));
+
                 cfg.CreateMap<CategoryEntity, CategoryDto>();
             });
 
