@@ -56,5 +56,27 @@ namespace infrastructure.Services
         {
             return await _context.Transactions.Include(e => e.Category).ToListAsync();
         }
+
+        public async Task<TransactionEntity> UpdateTransactionAsync(UpdateTransactionCommand transactionCommand)
+        {
+            var updated  = await _context.Transactions.ExecuteUpdateAsync(
+                s => s.SetProperty(e => e.Amount, transactionCommand.Amount)
+                .SetProperty(e => e.Description, transactionCommand.Description)
+                .SetProperty(e => e.Date, transactionCommand.Date)
+                .SetProperty(e => e.CategoryId, transactionCommand.CategoryId)
+                .SetProperty(e => e.TransactionTypeId, transactionCommand.typeId)
+            );
+
+            var transaction = await _context.Transactions
+                .Include(e => e.Category)
+                .Where(e => e.Id == transactionCommand.Id).FirstOrDefaultAsync();
+
+            if (transaction == null)
+            {
+                throw new Exception("Transaction not found");
+            }
+
+            return transaction;
+        }
     }
 }
