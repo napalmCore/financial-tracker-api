@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Transaction.Commands;
 using Application.Dtos;
 using Application.Transaction.Queries;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Api.Controllers
 {
@@ -27,6 +28,10 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<ActionResult<TransactionDto>> Create([FromBody] CreateTransactionCommand transaction)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var createdTransaction = await _mediator.Send(transaction);
 
             return createdTransaction;
@@ -42,6 +47,26 @@ namespace Api.Controllers
             }
             return transaction;
 
+        }
+
+        [HttpPatch]
+        public async Task<ActionResult<TransactionDto>> Update(int id, [FromBody] UpdateTransactionCommand transaction)
+        {
+            if (!ModelState.IsValid) 
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != transaction.Id)
+            {
+                return BadRequest("Id in URL does not match Id in body");
+            }
+            var updatedTransaction = await _mediator.Send(transaction);
+            if (updatedTransaction == null)
+            {
+                return NotFound();
+            }
+            return updatedTransaction;
         }
     }
 }
