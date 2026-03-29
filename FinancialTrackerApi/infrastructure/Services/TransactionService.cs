@@ -34,6 +34,11 @@ namespace infrastructure.Services
 
         }
 
+        public async Task<int> DeleteTransactionAsync(int id)
+        {
+            return await _context.Transactions.Where(e => e.Id == id).ExecuteDeleteAsync();
+        }
+
         public async Task<TransactionEntity> GetTransactionByIdAsync(int id)
         {
             var transaction = await _context.Transactions
@@ -62,7 +67,6 @@ namespace infrastructure.Services
             var updated  = await _context.Transactions.ExecuteUpdateAsync(
                 s => s.SetProperty(e => e.Amount, transactionCommand.Amount)
                 .SetProperty(e => e.Description, transactionCommand.Description)
-                .SetProperty(e => e.Date, transactionCommand.Date)
                 .SetProperty(e => e.CategoryId, transactionCommand.CategoryId)
                 .SetProperty(e => e.TransactionTypeId, transactionCommand.typeId)
             );

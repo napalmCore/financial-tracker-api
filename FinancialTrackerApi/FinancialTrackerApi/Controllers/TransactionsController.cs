@@ -45,6 +45,7 @@ namespace Api.Controllers
             {
                 return NotFound();
             }
+
             return transaction;
 
         }
@@ -52,7 +53,7 @@ namespace Api.Controllers
         [HttpPatch]
         public async Task<ActionResult<TransactionDto>> Update(int id, [FromBody] UpdateTransactionCommand transaction)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -61,12 +62,25 @@ namespace Api.Controllers
             {
                 return BadRequest("Id in URL does not match Id in body");
             }
+            
             var updatedTransaction = await _mediator.Send(transaction);
             if (updatedTransaction == null)
             {
                 return NotFound();
             }
+
             return updatedTransaction;
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteTransactionCommand { Id = id });
+            if (result == 0)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }
