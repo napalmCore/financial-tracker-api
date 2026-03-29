@@ -64,7 +64,8 @@ namespace infrastructure.Services
 
         public async Task<TransactionEntity> UpdateTransactionAsync(UpdateTransactionCommand transactionCommand)
         {
-            var updated  = await _context.Transactions.ExecuteUpdateAsync(
+            var updated  = await _context.Transactions.Where(e => e.Id == transactionCommand.Id)
+                .ExecuteUpdateAsync(
                 s => s.SetProperty(e => e.Amount, transactionCommand.Amount)
                 .SetProperty(e => e.Description, transactionCommand.Description)
                 .SetProperty(e => e.CategoryId, transactionCommand.CategoryId)
