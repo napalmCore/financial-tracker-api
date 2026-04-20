@@ -46,7 +46,7 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader();
-                          policy.WithOrigins("https://financial-tracker-api-cscjhkasdgfvfvf4.canadacentral-01.azurewebsites.net/")
+                          policy.WithOrigins("https://brave-sea-06added0f.7.azurestaticapps.net/")
                           .AllowAnyMethod()
                           .AllowAnyHeader();
 
