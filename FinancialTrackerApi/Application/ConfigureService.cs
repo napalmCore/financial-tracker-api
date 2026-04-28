@@ -1,6 +1,8 @@
 ﻿using Application.Category.Queries;
 using Application.Dtos;
+using Application.Transaction.Queries;
 using Domaine.Entities;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -24,6 +26,8 @@ namespace Application
 
                 cfg.CreateMap<CategoryEntity, CategoryDto>();
             });
+
+            services.AddTransient<IValidator<GetTransactionsByTypeQuery>, GetTransactionByTypeValidator>();
 
             return services;
         }

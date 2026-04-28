@@ -1,4 +1,6 @@
-﻿using Application.Transaction.Commands;
+﻿using Application.Exceptions;
+using Application.Transaction.Commands;
+using Application.Transaction.Queries;
 using Domaine.Entities;
 using infrastructure.db;
 using Microsoft.EntityFrameworkCore;
@@ -78,10 +80,18 @@ namespace infrastructure.Services
 
             if (transaction == null)
             {
-                throw new Exception("Transaction not found");
+                throw new NotFoundException("Transaction not found");
             }
 
             return transaction;
+        }
+
+        public async Task<List<TransactionEntity>> GetTransactionsByTypeId(GetTransactionsByTypeQuery request) {
+            return await _context.Transactions
+                .Include(e => e.Category).Where(
+                e => e.TransactionTypeId == request.TypeId
+                && e.Date >= request.From && e.Date <= request.To
+                ).ToListAsync();
         }
     }
 }

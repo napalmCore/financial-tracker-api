@@ -1,8 +1,10 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Application.Dtos;
+using Application.Exceptions;
 using Application.Transaction.Commands;
-using Application.Dtos;
 using Application.Transaction.Queries;
+using FluentValidation;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Api.Controllers
@@ -62,7 +64,7 @@ namespace Api.Controllers
             {
                 return BadRequest("Id in URL does not match Id in body");
             }
-            
+
             var updatedTransaction = await _mediator.Send(transaction);
             if (updatedTransaction == null)
             {
@@ -81,6 +83,23 @@ namespace Api.Controllers
                 return NotFound();
             }
             return NoContent();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<TransactionDto>>> GetByType([FromBody] GetTransactionsByTypeQuery query)
+        {
+            try
+            {
+                var transactions = await _mediator.Send(query);
+                return Ok(transactions);
+            }
+            catch (NotFoundException ex) { 
+                return NotFound();
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Errors);
+            }
         }
     }
 }

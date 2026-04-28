@@ -1,5 +1,6 @@
-﻿using Domaine.Entities;
-using Application.Transaction.Commands;
+﻿using Application.Transaction.Commands;
+using Application.Transaction.Queries;
+using Domaine.Entities;
 
 namespace infrastructure.Services
 {
@@ -11,5 +12,6 @@ namespace infrastructure.Services
         Task<List<TransactionEntity>> GetTransactions();
         Task<TransactionEntity> UpdateTransactionAsync(UpdateTransactionCommand transactionCommand);
         Task<int> DeleteTransactionAsync(int id);
+        Task<List<TransactionEntity>> GetTransactionsByTypeId(GetTransactionsByTypeQuery request);
     }
 }

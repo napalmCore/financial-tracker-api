@@ -17,6 +17,7 @@ namespace infrastructure
         {
             services.AddTransient<ITransactionServcie, TransactionService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ITransactionTypeService, TransactionTypeService>();
 
             return services;
         }
