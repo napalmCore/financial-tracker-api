@@ -93,5 +93,19 @@ namespace infrastructure.Services
                 && e.Date >= request.From && e.Date <= request.To
                 ).ToListAsync();
         }
+
+        public async Task<List<TransactionEntity>> GetTransactionsGroupByCategory(GetTransactionsGroupedByCategoryQuery request)
+        {
+            return await _context.Transactions.Include(e => e.Category).Where(
+                e => e.TransactionTypeId == request.TypeId
+                && e.Date >= request.From && e.Date <= request.To
+                ).GroupBy(e => e.CategoryId)
+                .Select(g => new TransactionEntity
+                {
+                    CategoryId = g.Key,
+                    Category = g.FirstOrDefault().Category,
+                    Amount = g.Sum(e => e.Amount)
+                }).ToListAsync();
+        }
     }
 }

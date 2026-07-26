@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Category.Queries
 {
-    public record GetCategoriesRequest : IRequest<List<CategoryDto>>;
+    public record GetCategoriesRequest(int? transactionTypeId) : IRequest<List<CategoryDto>>;
 
     public class GetCategoriesQuery : IRequestHandler<GetCategoriesRequest, List<CategoryDto>>
     {
@@ -18,7 +18,7 @@ namespace Application.Category.Queries
 
         public async Task<List<CategoryDto>> Handle(GetCategoriesRequest request, CancellationToken cancellationToken)
         {
-            var categories = await _categoryService.GetAllCategoriesAsync();
+            var categories = await _categoryService.GetAllCategoriesAsync(request);
             var categoryDtos = categories.Select(c => new CategoryDto
             {
                 Id = c.Id,

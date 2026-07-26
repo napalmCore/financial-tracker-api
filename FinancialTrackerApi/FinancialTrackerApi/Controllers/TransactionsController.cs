@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Api.Controllers
 {
     [Route("api/v{version:apiVersion}/[controller]/{action=Index}/{id:int?}")]
+    [Route("api/v{version:apiVersion}/[controller]/{action=Index}")]
     [Route("api/[controller]/{action=Index}/{id:int?}")]
     public class TransactionsController : ControllerBase
     {
@@ -94,6 +95,31 @@ namespace Api.Controllers
                 return Ok(transactions);
             }
             catch (NotFoundException ex) { 
+                return NotFound();
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Errors);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<TransactionDto>>> GetGroupedByCategory(
+            DateTime from, DateTime to, int typeId)
+        {
+            try
+            {
+                var GetGroupedVategoryQuery = new GetTransactionsGroupedByCategoryQuery()
+                {
+                    TypeId = typeId,
+                    From = from,
+                    To = to,
+                };
+                var transactions = await _mediator.Send(GetGroupedVategoryQuery);
+                return Ok(transactions);
+            }
+            catch (NotFoundException ex)
+            {
                 return NotFound();
             }
             catch (ValidationException ex)

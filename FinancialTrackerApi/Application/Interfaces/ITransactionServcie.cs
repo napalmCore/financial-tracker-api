@@ -13,5 +13,6 @@ namespace infrastructure.Services
         Task<TransactionEntity> UpdateTransactionAsync(UpdateTransactionCommand transactionCommand);
         Task<int> DeleteTransactionAsync(int id);
         Task<List<TransactionEntity>> GetTransactionsByTypeId(GetTransactionsByTypeQuery request);
+        Task<List<TransactionEntity>> GetTransactionsGroupByCategory(GetTransactionsGroupedByCategoryQuery request);
     }
 }
