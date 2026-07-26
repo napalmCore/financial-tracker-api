@@ -28,6 +28,8 @@ namespace Application
             });
 
             services.AddTransient<IValidator<GetTransactionsByTypeQuery>, GetTransactionByTypeValidator>();
+            services.AddTransient<IValidator<GetTransactionsGroupedByCategoryQuery>, GetTransactionGroupedByCategoryValidator>();
+
 
             return services;
         }
