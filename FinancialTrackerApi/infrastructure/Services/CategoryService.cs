@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Category.Queries;
+using Application.Interfaces;
 using Domaine.Entities;
 using infrastructure.db;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +17,15 @@ namespace Domaine.Services
             _context = dbContext;
         }
 
-        public async Task<List<CategoryEntity>> GetAllCategoriesAsync()
+        public async Task<List<CategoryEntity>> GetAllCategoriesAsync(GetCategoriesRequest request)
         {
+            if (request.transactionTypeId.HasValue)
+            {
+                return await _context.Categories
+                    .Where(c => c.TransactionTypeId == request.transactionTypeId.Value)
+                    .ToListAsync();
+            }
+
             return await _context.Categories.ToListAsync();
         }
 

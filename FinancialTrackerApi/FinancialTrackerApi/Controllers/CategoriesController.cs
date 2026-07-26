@@ -8,6 +8,8 @@ namespace FinancialTrackerApi.Controllers
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]/{action=Index}")]
     [Route("api/[controller]/{action=Index}")]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class CategoriesController : ControllerBase
     {
         private IMediator _mediator;
@@ -17,11 +19,19 @@ namespace FinancialTrackerApi.Controllers
             _mediator = mediator;
         }
 
-        [ApiVersion("1.0")]
-        [HttpGet]
+
+        [HttpGet, MapToApiVersion("1.0")]
         public async Task<ActionResult<List<CategoryDto>>> IndexAsync()
         {
-            var categories = await _mediator.Send(new GetCategoriesRequest());
+            var categories = await _mediator.Send(new GetCategoriesRequest(null));
+
+            return categories;
+        }
+
+        [HttpGet, MapToApiVersion("2.0")]
+        public async Task<ActionResult<List<CategoryDto>>> IndexAsync(int? transactionTypeId)
+        {
+            var categories = await _mediator.Send(new GetCategoriesRequest(transactionTypeId));
 
             return categories;
         }
