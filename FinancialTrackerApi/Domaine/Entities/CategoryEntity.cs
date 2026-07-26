@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domaine.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domaine.Entities
 {
@@ -7,5 +8,7 @@ namespace Domaine.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public int TransactionTypeId { get; set; } = TransactionTypes.Income;
     }
 }
